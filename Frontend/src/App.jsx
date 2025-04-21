@@ -582,10 +582,10 @@ LIMIT 10;`
   };
 
   return (
-    <div className={isDarkMode ? 'dark app-container' : 'light app-container'}>
+    <div className={isDarkMode ? 'dark app-container' : 'light app-container'} style={{ width: '100%', overflowX: 'hidden' }}>
       <Header onThemeChange={handleThemeChange} />
-      <main>
-        <div className="container">
+      <main style={{ width: '100%', overflowX: 'hidden' }}>
+        <div className="container" style={{ width: '100%', maxWidth: '1280px' }}>
           <section className="section text-center fade-in">
             <h1 className="text-3xl font-bold mb-4">AI-Powered Code Review</h1>
             <p className="text-lg text-center max-w-2xl mx-auto text-secondary mb-8">
