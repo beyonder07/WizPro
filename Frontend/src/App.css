@@ -939,3 +939,151 @@ pre, code {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+/* Add these styles for the mobile menu toggle button */
+.mobile-menu-toggle {
+  display: none; /* Hidden by default on desktop */
+}
+
+/* Show mobile menu toggle on smaller screens */
+@media (max-width: 1024px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+/* Mobile menu styling */
+.mobile-menu {
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  padding: 1rem;
+  z-index: 99;
+  animation: slideDown 0.3s ease-in-out;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mobile-nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: color 0.2s var(--transition-fast);
+}
+
+.mobile-nav-link:hover {
+  color: var(--primary);
+}
+
+.mobile-cta {
+  width: 100%;
+  justify-content: center;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sun-Moon Toggle Animation */
+.sun-moon-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.toggle-icon.sun {
+  background-color: #fbbf24;
+  box-shadow: 0 0 10px #fbbf24;
+}
+
+.toggle-icon.moon {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.toggle-inner-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.sun .toggle-inner-circle {
+  opacity: 0;
+}
+
+.moon .toggle-inner-circle {
+  background-color: var(--card-bg);
+  transform: translateX(30%);
+  opacity: 1;
+}
+
+/* Sun rays effect */
+.sun::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #fbbf24 30%, transparent 31%);
+  background-size: 7px 7px;
+  border-radius: 50%;
+  animation: sunRays 2s linear infinite;
+}
+
+@keyframes sunRays {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Star effect for moon */
+.moon::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  top: 3px;
+  left: 3px;
+  box-shadow: 
+    8px 2px 0 0 rgba(255, 255, 255, 0.5),
+    12px 10px 0 0 rgba(255, 255, 255, 0.3);
+}

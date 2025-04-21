@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaSun, FaMoon, FaCode, FaGithub, FaRocket,FaLinkedin  } from 'react-icons/fa';
+import { FaCode, FaGithub, FaRocket, FaLinkedin, FaBars, FaTimes,FaSun, FaMoon} from 'react-icons/fa';
 
 const Header = ({ onThemeChange }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -66,6 +66,25 @@ const Header = ({ onThemeChange }) => {
         </nav>
 
         <div className="header-actions">
+        <button
+  onClick={toggleTheme}
+  className="theme-toggle sun-moon-toggle"
+  aria-label="Toggle dark mode"
+>
+  {isDarkMode ? (
+    <div className="toggle-icon">
+      <FaSun size={18} />
+      <span>Switch to light mode</span>
+    </div>
+  ) : (
+    <div className="toggle-icon">
+      <FaMoon size={18} />
+      <span>Switch to dark mode</span>
+    </div>
+  )}
+</button>
+
+          
           <a 
             href="https://github.com/beyonder07" 
             target="_blank" 
@@ -83,10 +102,14 @@ const Header = ({ onThemeChange }) => {
           >
             <FaLinkedin size={18} />
           </a>
-          
-         
-          
-      
+
+          <button
+            onClick={toggleMobileMenu}
+            className="mobile-menu-toggle theme-toggle"
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
+          </button>
         </div>
       </div>
       
