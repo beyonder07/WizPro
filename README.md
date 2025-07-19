@@ -1,5 +1,14 @@
 # 🚀 [WiZpro – AI-Powered Code Review](https://wiz-pro-g5pc.vercel.app/)
 
+<p align="center">
+  <a href="https://github.com/beyonder07" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="https://www.linkedin.com/in/rajul-mishra-621548258/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+</p>
+
 > **Live Demo:** [https://wiz-pro-g5pc.vercel.app/](https://wiz-pro-g5pc.vercel.app/)
 
 ---
