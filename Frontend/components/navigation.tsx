@@ -94,8 +94,12 @@ export function Navigation() {
                 <ThemeToggle />
               </div>
               <div className="hidden sm:flex items-center gap-3">
-                <Github className="nav-item w-5 h-5 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition-all duration-300 hover:scale-110 hover:rotate-12" />
-                <Linkedin className="nav-item w-5 h-5 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition-all duration-300 hover:scale-110 hover:-rotate-12" />
+                <a href="https://github.com/beyonder07" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <Github className="nav-item w-5 h-5 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition-all duration-300 hover:scale-110 hover:rotate-12" />
+                </a>
+                <a href="https://www.linkedin.com/in/rajul-mishra-621548258/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <Linkedin className="nav-item w-5 h-5 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition-all duration-300 hover:scale-110 hover:-rotate-12" />
+                </a>
               </div>
 
               {/* Mobile Menu Button */}
@@ -133,8 +137,12 @@ export function Navigation() {
                 </Link>
               ))}
               <div className="flex items-center gap-4 pt-4 border-t border-orange-200 dark:border-gray-700">
-                <Github className="w-5 h-5 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition-colors duration-300" />
-                <Linkedin className="w-5 h-5 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition-colors duration-300" />
+                <a href="https://github.com/beyonder07" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <Github className="w-5 h-5 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition-colors duration-300" />
+                </a>
+                <a href="https://www.linkedin.com/in/rajul-mishra-621548258/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <Linkedin className="w-5 h-5 text-gray-600 dark:text-gray-400 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer transition-colors duration-300" />
+                </a>
               </div>
             </nav>
           </div>
