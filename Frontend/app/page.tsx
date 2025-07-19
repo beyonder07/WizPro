@@ -52,7 +52,7 @@ export default function HomePage() {
     setCode(codeTemplates[lang] || "")
   }
 
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3000';
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
   const handleReviewCode = async () => {
     setIsReviewing(true)
     try {
@@ -61,14 +61,14 @@ export default function HomePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code }),
       })
-      const data = await response.json()
-      setReviewResult(data)
-      setHasReview(true)
+      const data = await response.text(); // Use .text() because backend returns a string
+      setReviewResult(data);
+      setHasReview(true);
     } catch (error) {
-      setReviewResult({ error: 'Failed to get review from backend.' })
-      setHasReview(true)
+      setReviewResult('Failed to get review from backend.');
+      setHasReview(true);
     }
-    setIsReviewing(false)
+    setIsReviewing(false);
   }
 
   return (

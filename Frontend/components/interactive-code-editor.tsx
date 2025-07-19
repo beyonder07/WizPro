@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { Code2, Zap, Bug, TrendingUp, Shield, Sparkles } from "lucide-react"
+import ReactMarkdown from 'react-markdown';
 
 interface InteractiveCodeEditorProps {
   onReview: () => void
@@ -58,35 +59,7 @@ export function InteractiveCodeEditor({ onReview, isReviewing, hasReview, code, 
     setTimeout(() => setTypingEffect(false), 200)
   }
 
-  // Remove mockReview and use reviewResult
-  const fallbackReview = {
-    score: 85,
-    issues: [
-      {
-        type: "suggestion",
-        line: 2,
-        message: "Consider using arrow function for better readability",
-        severity: "low",
-      },
-      {
-        type: "improvement",
-        line: 3,
-        message: "Add input validation to check if items is an array",
-        severity: "medium",
-      },
-    ],
-    suggestions: [
-      "Add JSDoc comments for better documentation",
-      "Consider using TypeScript for better type safety",
-      "Add error handling for edge cases",
-    ],
-  }
-  const review = {
-    ...fallbackReview,
-    ...reviewResult,
-    issues: (reviewResult && Array.isArray(reviewResult.issues)) ? reviewResult.issues : fallbackReview.issues,
-    suggestions: (reviewResult && Array.isArray(reviewResult.suggestions)) ? reviewResult.suggestions : fallbackReview.suggestions,
-  }
+  // Remove fallbackReview and use only reviewResult
 
   return (
     <div className="grid lg:grid-cols-2 gap-8">
@@ -172,13 +145,13 @@ export function InteractiveCodeEditor({ onReview, isReviewing, hasReview, code, 
               variant="secondary"
               className="ml-auto bg-white text-orange-600 dark:bg-gray-700 dark:text-blue-400 animate-bounce relative z-10"
             >
-              Score: {review.score}/100
+              Score: {reviewResult?.score}/100
             </Badge>
           )}
         </div>
 
         <div className="p-6 min-h-[400px] bg-gradient-to-br from-white to-orange-50/30 dark:from-gray-900/50 dark:to-gray-800/30 relative">
-          {!hasReview ? (
+          {!hasReview || !reviewResult ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <div className="relative">
                 <Code2 className="w-16 h-16 text-orange-300 dark:text-blue-400 mb-4 animate-pulse" />
@@ -187,92 +160,30 @@ export function InteractiveCodeEditor({ onReview, isReviewing, hasReview, code, 
               <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white animate-fade-in">
                 No review yet
               </h3>
-              <p
-                className="text-gray-600 dark:text-gray-300 text-sm max-w-xs animate-fade-in"
-                style={{ animationDelay: "0.2s" }}
-              >
+              <p className="text-gray-600 dark:text-gray-300 text-sm max-w-xs animate-fade-in" style={{ animationDelay: "0.2s" }}>
                 Write or paste your code in the editor, then click "Review Code" to get AI-powered feedback.
               </p>
             </div>
           ) : (
-            <div className="space-y-6 animate-fade-in">
-              <div className="flex items-center gap-2 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                <TrendingUp className="w-5 h-5 text-green-600 dark:text-green-400 animate-bounce" />
-                <span className="font-semibold text-gray-800 dark:text-white">
-                  Code Quality Score: {review.score}/100
-                </span>
-                <div className="ml-auto w-16 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-green-400 to-green-600 rounded-full animate-pulse"
-                    style={{ width: `${review.score}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              {review.error ? (
-                <div className="text-red-600 dark:text-red-400 font-semibold text-center p-4">
-                  {review.error}
-                </div>
-              ) : (
-                <>
-                  <div>
-                    <h4 className="font-semibold mb-3 flex items-center gap-2 text-gray-800 dark:text-white">
-                      <Bug className="w-4 h-4 text-red-500 animate-pulse" />
-                      Issues Found
-                    </h4>
-                    <div className="space-y-3">
-                      {review.issues.map((issue: any, index: number) => (
-                        <div
-                          key={index}
-                          className="p-4 bg-orange-50 dark:bg-gray-800/50 border border-orange-200 dark:border-gray-700 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-md"
-                          style={{ animationDelay: `${index * 0.1}s` }}
-                        >
-                          <div className="flex items-center gap-2 mb-2">
-                            <Badge
-                              variant={
-                                issue.severity === "high"
-                                  ? "destructive"
-                                  : issue.severity === "medium"
-                                    ? "default"
-                                    : "secondary"
-                              }
-                              className={`${issue.severity === "medium" ? "bg-orange-600 dark:bg-blue-600" : ""} animate-pulse`}
-                            >
-                              Line {issue.line}
-                            </Badge>
-                            <Badge variant="outline" className="border-orange-300 dark:border-gray-600">
-                              {issue.severity}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-gray-700 dark:text-gray-300">{issue.message}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-3 text-gray-800 dark:text-white flex items-center gap-2">
-                      <Sparkles
-                        className="w-4 h-4 text-orange-600 dark:text-blue-400 animate-spin"
-                        style={{ animationDuration: "3s" }}
-                      />
-                      Suggestions
-                    </h4>
-                    <ul className="space-y-3">
-                      {review.suggestions.map((suggestion: string, index: number) => (
-                        <li
-                          key={index}
-                          className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 transform transition-all duration-300 hover:translate-x-2 p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800/30"
-                          style={{ animationDelay: `${index * 0.1}s` }}
-                        >
-                          <div className="w-1.5 h-1.5 bg-orange-600 dark:bg-blue-400 rounded-full mt-2 flex-shrink-0 animate-pulse"></div>
-                          {suggestion}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </>
-              )}
+            <div className="markdown-preview">
+              <ReactMarkdown
+                components={{
+                  code({node, inline, className, children, ...props}) {
+                    if (inline) {
+                      return <code className={className}>{children}</code>;
+                    }
+                    return (
+                      <pre className={className} {...props}>
+                        {String(children).split('\n').map((line, i) => (
+                          <div className="code-line" key={i}>{line}</div>
+                        ))}
+                      </pre>
+                    );
+                  },
+                }}
+              >
+                {reviewResult}
+              </ReactMarkdown>
             </div>
           )}
         </div>
